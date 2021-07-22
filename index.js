@@ -36,9 +36,16 @@ const studentsArr = [
  * @param {Object[]} students - An array of objects, each representing a student.
  * @returns {String} A string containing the names of all the students from the `students` array.
  */
-function stringNames(students) {
 
-}
+function stringNames(students) {
+  let names = '';
+ for (student of students) {
+  names = names + student.name + ', '
+ } 
+ names = names.slice(0, -2)
+ console.log(names)
+ return names
+} 
 
 stringNames(studentsArr);
 //> "Leanne Graham, Ervin Howell, Clementine Bauch, Patricia Lebsack, John Dietrich, Dennis Schulist"
@@ -48,9 +55,16 @@ stringNames(studentsArr);
  * @param {Object[]} students - An array of objects, each representing a student.
  * @returns {String[]} An array of the names of all the students from the `students` array.
  */
+  
 function arrayNames(students) {
-
-}
+  let ans = []
+    for (student of students) {
+      let stringName = student.name
+      ans.push(stringName)
+    }
+    console.log(ans);
+    return ans
+  }
 
 arrayNames(studentsArr);
 //> ['Leanne Graham', 'Ervin Howell', 'Clementine Bauch', 'Patricia Lebsack', 'John Dietrich', 'Dennis Schulist']
@@ -61,8 +75,16 @@ arrayNames(studentsArr);
  * @param {String} name - The name of the student to find.
  * @returns {Object} The student in the class whose name matches.
  */
-function findByName(students, name) {
 
+function findByName(students, name) {
+let matchName = {};
+  for (student of students) {
+    nm = student.name
+      if (nm === name) {
+      matchName = student
+    }
+  }   console.log(matchName)
+    return matchName
 }
 
 findByName(studentsArr, "Clementine Bauch");
@@ -76,8 +98,14 @@ findByName(studentsArr, "John Dietrich");
  * @param {Object[]} students - An array of objects, each representing a student.
  * @returns {Number} The average GPA for the class.
  */
-function findAverageGPA(students) {
 
+function findAverageGPA(students) {
+ let gpa = 0;
+ for (student of students) {
+   gpa += student.GPA / students.length
+  } 
+  console.log(gpa)
+  return gpa
 }
 
 findAverageGPA(studentsArr);
@@ -89,8 +117,15 @@ findAverageGPA(studentsArr);
  * @param {String} role - The role of the desired students.
  * @returns {Object[]} The students who have the role.
  */
-function filterByRole(students, role) {
 
+function filterByRole(students, role) {
+  let job = [];
+   for (student of students) {
+      if (student.role === role) {
+      job.push(student)
+    }
+  }  console.log(job)
+    return job
 }
 
 filterByRole(studentsArr, "Hall Monitor");
@@ -120,3 +155,24 @@ filterByRole(studentsArr, "Teacher's Assistant");
 //         "role": "Teacher's Assistant",
 //     }
 // ]
+
+/**
+ * Finds the student with the lowest GPA.
+ * @param {Object[]} students - An array of objects, each representing a student.
+ * @returns {Object} The student with the lowest GPA.
+ * */
+
+function findLowestGPAStudent(students) {
+  let lowGPA = students[0];
+    for (student of students) {
+  let lowest = student.GPA
+    if (lowest < lowGPA.GPA) {
+    lowGPA = student 
+    } 
+  }
+    console.log(lowGPA)
+    return lowGPA
+}
+
+(findLowestGPAStudent(studentsArr));
+//> { name: "Ervin Howell", GPA: 2.9, role: "Hall Monitor" }
